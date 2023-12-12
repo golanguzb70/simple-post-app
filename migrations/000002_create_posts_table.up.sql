@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS posts (
+   id UUID NOT NULL PRIMARY KEY,
+   slug varchar UNIQUE NOT NULL,
+   title text NOT NULL,
+   content text NOT NULL,
+   user_id uuid NOT NULL REFERENCES users(id),
+   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+   deleted_at TIMESTAMP WITHOUT TIME ZONE
+);

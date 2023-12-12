@@ -1,0 +1,61 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - 5433:5432
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+      
+  migrate:
+    container_name: migrate
+    image: migrate/migrate:v4.15.2
+    volumes:
+      - ./migrations:/migrations
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DB}
+    entrypoint: migrate -path /migrations -database "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable"
+    command: up
+    depends_on:
+      - postgres
+    restart: on-failure
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6378:6379
+
+  app:
+    container_name: gin-postgres-bearerauth-monolithic
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DB}
+      - SMTP_EMAIL=${SMTP_EMAIL}
+      - SMTP_EMAIL_PASS=${SMTP_EMAIL_PASS}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+
+# volumes:
+#   postgres_data:

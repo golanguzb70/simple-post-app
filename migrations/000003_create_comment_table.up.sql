@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS comments (
+   id uuid UNIQUE PRIMARY KEY,
+   user_id uuid NOT NULL REFERENCES users(id),
+   post_id uuid NOT NULL REFERENCES posts(id),
+   comment text NOT NULL,
+   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+   deleted_at TIMESTAMP WITHOUT TIME ZONE
+);

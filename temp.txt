@@ -1,0 +1,7 @@
+psql postgresql://azizbek:secret@localhost:5433/postapp
+
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_USER=azizbek
+POSTGRES_PASSWORD=secret
+POSTGRES_DB=postapp
