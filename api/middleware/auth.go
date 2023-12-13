@@ -87,15 +87,15 @@ func (a *JwtRoleAuth) CheckPermission(r *http.Request) (bool, error) {
 // RequirePermission aborts request with 403 status
 func (a *JwtRoleAuth) RequirePermission(c *gin.Context) {
 	c.AbortWithStatusJSON(403, models.StandardResponse{
-		Status:  v1.PermissionDenied,
-		Message: "Permission denied",
+		StatusId: v1.PermissionDenied,
+		Message:  "Permission denied",
 	})
 }
 
 // RequireRefresh aborts request with 401 status
 func (a *JwtRoleAuth) RequireRefresh(c *gin.Context) {
 	c.AbortWithStatusJSON(401, models.StandardResponse{
-		Status:  v1.AccessTokenExpired,
-		Message: "Access token expired",
+		StatusId: v1.AccessTokenExpired,
+		Message:  "Access token expired",
 	})
 }

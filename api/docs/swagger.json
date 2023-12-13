@@ -865,6 +865,9 @@
                 "comment": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "post_id": {
                     "type": "string"
                 },
@@ -963,6 +966,9 @@
                 "content": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "slug": {
                     "type": "string"
                 },
@@ -1041,7 +1047,7 @@
                 "message": {
                     "type": "string"
                 },
-                "status": {
+                "status_id": {
                     "type": "string"
                 }
             }

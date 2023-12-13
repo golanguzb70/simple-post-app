@@ -33,7 +33,7 @@ func (h *handlerV1) HandleDatabaseLevelWithMessage(c *gin.Context, err error, me
 
 		h.log.Error(message, err, args)
 		c.AbortWithStatusJSON(statuscode, models.StandardResponse{
-			Status:  errorCode,
+			StatusId:  errorCode,
 			Message: message,
 		})
 		return true
@@ -42,26 +42,26 @@ func (h *handlerV1) HandleDatabaseLevelWithMessage(c *gin.Context, err error, me
 }
 
 // Handles response according to err arguments. If err is nil it returns false otherwise true
-func (h *handlerV1) HandleResponse(c *gin.Context, err error, httpStatusCode int, status, message string, data any, args ...any) bool {
+func (h *handlerV1) HandleResponse(c *gin.Context, err error, httpStatusCode int, statusId, message string, data any, args ...any) bool {
 	if err != nil {
-		if status != InternalServerError {
+		if statusId != InternalServerError {
 			c.AbortWithStatusJSON(httpStatusCode, models.StandardResponse{
-				Status:  status,
+				StatusId:  statusId,
 				Message: message,
 				Data:    data,
 			})
 		} else {
 			h.log.Error(message, err, args)
 			c.AbortWithStatusJSON(httpStatusCode, models.StandardResponse{
-				Status:  status,
+				StatusId:  statusId,
 				Message: "Internal server error",
 				Data:    data,
 			})
 		}
 		return true
-	} else if status == "success" {
+	} else if statusId == "success" {
 		c.JSON(httpStatusCode, models.StandardResponse{
-			Status:  status,
+			StatusId:  statusId,
 			Message: message,
 			Data:    data,
 		})

@@ -1,7 +1,7 @@
 package models
 
 type StandardResponse struct {
-	Status  string `json:"status"`
-	Message string `json:"message"`
-	Data    any    `json:"data"`
+	StatusId string `json:"status_id"`
+	Message  string `json:"message"`
+	Data     any    `json:"data"`
 }

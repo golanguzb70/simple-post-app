@@ -873,6 +873,9 @@ const docTemplate = `{
                 "comment": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "post_id": {
                     "type": "string"
                 },
@@ -971,6 +974,9 @@ const docTemplate = `{
                 "content": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "slug": {
                     "type": "string"
                 },
@@ -1049,7 +1055,7 @@ const docTemplate = `{
                 "message": {
                     "type": "string"
                 },
-                "status": {
+                "status_id": {
                     "type": "string"
                 }
             }

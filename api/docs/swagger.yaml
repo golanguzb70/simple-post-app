@@ -4,6 +4,8 @@ definitions:
     properties:
       comment:
         type: string
+      id:
+        type: string
       post_id:
         type: string
       user_id:
@@ -67,6 +69,8 @@ definitions:
     properties:
       content:
         type: string
+      id:
+        type: string
       slug:
         type: string
       title:
@@ -118,7 +122,7 @@ definitions:
       data: {}
       message:
         type: string
-      status:
+      status_id:
         type: string
     type: object
   models.UploadPhotoRes:
