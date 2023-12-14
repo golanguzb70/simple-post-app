@@ -15,3 +15,8 @@ p, user, /v1/post, PUT
 p, user, /v1/post/{id}, DELETE
 p, unauthorized, /v1/media/photo, POST
 p, unauthorized, /v1/media/{file_name}, GET
+p, user, /v1/comment, POST
+p, unauthorized, /v1/comment/{id}, GET
+p, unauthorized, /v1/comment/list, GET
+p, user, /v1/comment, PUT
+p, user, /v1/comment/{id}, DELETE
