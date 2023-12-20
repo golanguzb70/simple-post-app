@@ -20,7 +20,7 @@ func (h *handlerV1) HandleDatabaseLevelWithMessage(c *gin.Context, err error, me
 			errorCode = NotFound
 			statuscode = http.StatusNotFound
 		case codes.Unknown:
-			errorCode = InternalServerError
+			errorCode = BadRequest
 			statuscode = http.StatusBadRequest
 			message = "Ooops something went wrong"
 		case codes.Aborted:

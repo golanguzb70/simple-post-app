@@ -451,7 +451,7 @@ const docTemplate = `{
                 "summary": "Get post by key",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "path",

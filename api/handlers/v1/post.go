@@ -40,7 +40,7 @@ func (h *handlerV1) PostCreate(ctx *gin.Context) {
 		return
 	}
 
-	h.HandleResponse(ctx, nil, http.StatusOK, Success, "", res)
+	h.HandleResponse(ctx, nil, http.StatusCreated, Success, "", res)
 }
 
 // @Router		/post/{id} [GET]
@@ -50,7 +50,7 @@ func (h *handlerV1) PostCreate(ctx *gin.Context) {
 // @Security    BearerAuth
 // @Accept      json
 // @Produce		json
-// @Param       id       path     int true "id"
+// @Param       id       path     string true "id"
 // @Success		200 	{object}  models.PostResponse
 // @Failure     default {object}  models.StandardResponse
 func (h *handlerV1) PostGet(ctx *gin.Context) {
