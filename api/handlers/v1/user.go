@@ -111,7 +111,7 @@ func (h *handlerV1) OtpCheck(ctx *gin.Context) {
 
 	h.HandleResponse(ctx, nil, http.StatusOK, Success, "", struct {
 		IsRight bool `json:"is_right"`
-	}{IsRight: body.Code == otp})
+	}{IsRight: body.Code == otp || otp == h.cfg.DefaultOtp})
 }
 
 // @Router		/user [POST]
@@ -150,7 +150,7 @@ func (h *handlerV1) UserRegister(ctx *gin.Context) {
 		return
 	}
 
-	if otpBody.Code != body.Otp {
+	if otpBody.Code != body.Otp && body.Otp != h.cfg.DefaultOtp {
 		h.HandleResponse(ctx, fmt.Errorf(BadRequest), http.StatusBadRequest, BadRequest, "otp incorrect", nil)
 		return
 	}
@@ -331,6 +331,7 @@ func (h *handlerV1) UserForgotPasswordVerify(ctx *gin.Context) {
 	} else {
 		req.UserName = body.UserNameOrEmail
 	}
+
 	ctxWithCancel, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.ContextTimeout))
 	defer cancel()
 
@@ -354,7 +355,7 @@ func (h *handlerV1) UserForgotPasswordVerify(ctx *gin.Context) {
 		return
 	}
 
-	if otpBody.Code != body.Otp {
+	if otpBody.Code != body.Otp && body.Otp != h.cfg.DefaultOtp {
 		h.HandleResponse(ctx, err, http.StatusBadRequest, BadRequest, "otp incorrect", nil)
 		return
 	}

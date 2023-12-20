@@ -34,6 +34,7 @@ type Config struct {
 	RedisPort                 string
 	AccessTokenTimout         int // MINUTES
 	MaxImageSize              int // Mb
+	DefaultOtp                string
 }
 
 // Load loads environment vars and inflates Config
@@ -78,6 +79,8 @@ func Load() Config {
 
 	// Media
 	c.MaxImageSize = cast.ToInt(getOrReturnDefault("MAX_IMAGE_SIZE", 5))
+
+	c.DefaultOtp = cast.ToString(getOrReturnDefault("DEFAULT_OTP", "111111"))
 	return c
 }
 
